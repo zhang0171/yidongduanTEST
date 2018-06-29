@@ -1,0 +1,30 @@
+.lb{
+	width:100%;
+	height:auto;
+	/*background:beige;*/
+	padding-top:50px ;
+}
+.lb_list{
+	width:100%;
+	height:100px;
+	border-bottom:1px solid #ddd;
+}
+.lu{
+		margin-left:100px;
+}
+.delete{
+	display:block;
+	width:53px;
+	height:30px;line-height:30px;
+	text-align:center;
+	background:pink;
+	color:#FFFFFF;
+	float:right;
+	border-radius:10px;
+}
+
+
+
+
+
+

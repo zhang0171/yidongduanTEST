@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/index.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="format-detection" content="email=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<script>           
+     var bw = (document.documentElement.clientWidth/6.4)+"px";        
+     var htmlTag = document.getElementsByTagName("html")[0];        
+     htmlTag.style.fontSize=bw; 
+</script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+	</head>
+	<body>
+		<!------------------------------header-->
+		<header>
+			<a class="zhua">&#xe611;</a>
+			<a href="">首页</a>
+			<a href=""></a>
+		</header>
+		<div id="carousel">
+			<div id="box">
+				<ul class="content">
+					<li style="background:red;" class="list"></li>
+					<li style="background:blue;" class="list"></li>
+					<li style="background:yellow;" class="list"></li>
+					
+				</ul>
+				<ul class="nums">
+					<li class="num bg"></li>
+					<li class="num"></li>
+					<li class="num"></li>
+				</ul>
+			</div>
+		</div>
+		<div class="lb">
+			<!--<div class="lb_list">
+				<img style="width:70px;height:70px;background:#ddd;float:left;margin-left:16px;" src=""/>
+				<ul class="lu">
+					<li style="font-size:16px;font-weight: 900;">发的是飞方式方法洒发</li>
+					<li style="font-size: 12px;">售价<i>222</i>元</li>
+				</ul>
+			</div>-->
+		</div>
+		<!-----左滑菜单-->
+		<div class="zuoMenu">
+			<ul class="zMlist">
+				<li>个人中心</li>
+				<li>我的钱包</li>
+				<li>个性装扮</li>
+			</ul>
+		</div>
+		
+		<!-------------------------------------------footer-->
+		<footer>
+			<a href="index.html">
+			<em>&#xe611;</em>
+			<p>首页</p>
+			</a>
+			<a href="shopping.html">
+			<em>&#xe61d;</em>
+			<p>购物车</p>
+			</a>
+			<a href="login.html">
+			<em>&#xe654;</em>
+			<p>我的</p>
+			</a>
+		</footer>
+		
+		<script type="text/javascript">
+			var i = 0;
+			var timer = null;
+			$(function(){
+				$("#box").hover(function(){$(".btn").show();},function(){$(".btn").hide();})
+				$(".list").eq(0).show().siblings().hide();
+				show()
+				$(".num").hover(function(){
+					clearInterval(timer)
+					i=$(this).index();
+					move();
+//					console.log(this)
+				})
+				$("#box").mouseover(function(){
+					clearInterval(timer)
+				})
+				$("#box").mouseout(function(){
+					show()
+				})
+				function move(){
+					$(".list").eq(i).fadeIn(300).siblings().fadeOut(300);
+					$(".num").eq(i).addClass("bg").siblings().removeClass("bg")
+				}
+				function show(){
+					timer = setInterval(function(){
+						i++;
+						if(i==5){
+							i=0;
+						}
+						move();
+					},1000)
+				}
+			})
+			
+			var a = true;
+			$(".zhua").click(function(){
+				if(a==true){
+					$("header").stop().animate({left:"+3rem"},"slow")
+					$("#box").stop().animate({left:"+3rem"},"slow")
+					$(".lb").stop().animate({left:"+3rem"},"slow")
+					$("footer").stop().animate({left:"+3rem"},"slow")
+					$(".zuoMenu").stop().animate({left:"0rem"},"slow")
+					a=false;
+				}else{
+					$("header").stop().animate({left:"0rem"},"slow")
+					$("#box").stop().animate({left:"0rem"},"slow")
+					$(".lb").stop().animate({left:"0rem"},"slow")
+					$("footer").stop().animate({left:"0rem"},"slow")
+					$(".zuoMenu").stop().animate({left:"-3rem"},"slow")
+					a=true;
+				}
+			})
+			
+			$.getJSON("http://datainfo.duapp.com/shopdata/getGoods.php?callback=?",function(data){
+				console.log(data)
+				var _string ="";
+				for(var i=1;i<data.length;i++){
+					_string+=`
+						<div data-id="${data[i].goodsID}" class="lb_list">
+							<img style="width:70px;height:70px;background:#ddd;float:left;margin-left:16px;" src="${data[i].goodsListImg}"/>
+							<ul class="lu">
+								<li style="font-size:16px;font-weight: 900;">${data[i].goodsName}</li>
+								<li style="font-size: 12px;">售价<i>${data[i].price}</i>元</li>
+							</ul>
+						</div>
+					`
+			
+				}
+				$(".lb").html(_string);
+				$(".lb_list").click(function(){
+					var id = $(this).attr("data-id");
+					console.log(id);
+					window.location.href="page.html?id="+id;
+				})
+				
+				
+				
+				
+				})
+
+			
+
+			
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

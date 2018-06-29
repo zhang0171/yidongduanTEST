@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/login.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<script>           
+     var bw = (document.documentElement.clientWidth/6.4)+"px";        
+     var htmlTag = document.getElementsByTagName("html")[0];        
+     htmlTag.style.fontSize=bw; 
+</script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="">&#xe611;</a>
+			<a href="">我的</a>
+			<a href=""></a>
+		</header>
+		<div class="shen">
+		  	<input class="txt" placeholder="UserName" type="text" />
+		  	<input class="word" placeholder="PassWord" type="password" />
+		  	<p class="denglu">登录</p>
+		  	<p class="no">注册</p>
+		</div>
+		<!-------------------------------------------footer-->
+		<footer>
+			<a href="index.html">
+			<em>&#xe611;</em>
+			<p>首页</p>
+			</a>
+			<a href="shopping.html">
+			<em>&#xe61d;</em>
+			<p>购物车</p>
+			</a>
+			<a href="login.html">
+			<em>&#xe654;</em>
+			<p>我的</p>
+			</a>
+		</footer>
+		<script type="text/javascript">
+			$(".no").click(function(){
+				var ipt = $(".txt").val();
+				var ipt2 = $(".word").val();
+			  $.get("http://datainfo.duapp.com/shopdata/userinfo.php",
+			  		{status:"register",userID:ipt,password:ipt2},
+			  		function(data){
+			  			console.log(data)
+			  			if(data==0){
+			  				alert("用户名重名，请重新输入");
+			  			}else if(data==1){
+			  				alert("注册成功，请登录");
+			  				window.location.reload();
+			  			}else if(data===2){
+			  				alert("数据库报错");
+			  			}
+			  		}
+			  )
+				
+			})
+			$(".denglu").click(function(){
+				var ipt = $(".txt").val();
+				var ipt2 = $(".word").val();
+				$.get("http://datainfo.duapp.com/shopdata/userinfo.php",{
+			            status:"login",
+			            userID:ipt,
+			            password:ipt2
+			        },function(data){
+			        	console.log(data);
+			            if(data == 0){
+			                alert("用户名不存在")
+			            }else if(data == 2){
+			                alert("用户名与密码不符")
+			            }else{
+			                data =JSON.parse(data)
+			                console.log(data)
+			                alert("登录成功")
+			               location.assign("index.html");
+			            }
+
+        })
+			})
+			
+			
+			
+			
+		</script>
+	</body>
+</html>

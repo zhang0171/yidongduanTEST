@@ -1,0 +1,82 @@
+#box{
+				width:100%;
+				height:240px;
+				margin-top:44px;
+				position: relative;
+			}
+			.content li{
+				list-style: none;
+				position: absolute;
+			}
+			#carousel .btn{
+				color:white;
+				background-color:#000000;
+				opacity: .5;
+				width:10px;height:10px;
+				line-height:10px;
+				text-align:center;
+				font-size:10px;
+				position: absolute;
+				top:50%; margin-top:-45px;
+				cursor:pointer;
+				display: none;
+			}
+			#carousel .nums{
+				list-style: none;
+				position:absolute;
+				top:210px;
+				left:148px;
+			}
+			.nums .num{
+				float:left;
+				width:10px;
+				height:10px;
+				background:rgba(0,0,0,.2);
+				line-height:10px;
+				border-radius: 50%;
+				text-align: center;
+				margin-left:10px;
+				cursor: pointer;
+			}
+			.nums .bg{
+				background:black;
+			}
+			.list{
+				width:100%;
+				height:100%;
+			}
+.lb{
+	width:100%;
+	height:auto;
+	/*background:beige;*/
+	padding-top:20px ;
+	position: relative;
+}
+.lb_list{
+	width:100%;
+	height:100px;
+	border-bottom:1px solid #ddd;
+}
+.lu{
+		margin-left:100px;
+}
+.zuoMenu{
+	width:3rem;
+	height:100rem;
+	font-size:0.50rem;
+	background:darkcyan;
+	position: fixed;
+	top:0rem;
+	left:-3rem;
+}
+
+
+
+
+
+
+
+
+
+
+

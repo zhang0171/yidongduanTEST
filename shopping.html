@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/shopping.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<script>           
+     var bw = (document.documentElement.clientWidth/6.4)+"px";        
+     var htmlTag = document.getElementsByTagName("html")[0];        
+     htmlTag.style.fontSize=bw; 
+</script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js">
+	</script>
+	</head>
+	<body>
+		<!------------------------------header-->
+		<header>
+			<a href="">返回</a>
+			<a href="">购物车</a>
+			<a href=""></a>
+		</header>
+		
+		<div class="lb">
+			<!--<div class="lb_list">
+				<img style="width:70px;height:70px;background:#ddd;float:left;margin-left:16px;" src=""/>
+				<ul class="lu">
+					<li style="font-size:16px;font-weight: 900;">发的是飞方式方法洒发</li>
+					<li style="font-size: 12px;">售价<i>222</i>元</li>
+				</ul>
+				<a class="delete">删除</a>
+			</div>-->
+		</div>
+		
+		<!-------------------------------------------footer-->
+		<footer>
+			<a href="index.html">
+			<em>&#xe611;</em>
+			<p>首页</p>
+			</a>
+			<a href="shopping.html">
+			<em>&#xe61d;</em>
+			<p>购物车</p>
+			</a>
+			<a href="login.html">
+			<em>&#xe654;</em>
+			<p>我的</p>
+			</a>
+		</footer>
+		
+		
+		<script type="text/javascript">
+			$.getJSON(
+					"http://datainfo.duapp.com/shopdata/getCar.php?callback=?",
+					{userID:"13195610527"},
+					function(data){
+						console.log(data)
+						var str = "";
+						for(var i=0;i<data.length;i++){
+							str+=`
+							<div class="lb_list">
+								<img style="width:70px;height:70px;background:#ddd;float:left;margin-left:16px;" src="${data[i].goodsListImg}"/>
+								<ul class="lu">
+									<li style="font-size:16px;font-weight: 900;">${data[i].goodsName}</li>
+									<li style="font-size: 12px;">售价<i>${data[i].price}</i>元</li>
+								</ul>
+								<a data-id="${data[i].goodsID}" class="delete">删除</a>
+							</div>
+						`
+						}
+						$(".lb").html(str);
+						$(".delete").click(function(){
+							var id = $(this).attr("data-id");
+							$.get("http://datainfo.duapp.com/shopdata/updatecar.php",{userID:"13195610527",goodsID:id,number:0},function(data){
+								alert("确认删除此商品吗？");
+								location.assign("shopping.html");
+							})
+							
+							
+						})
+						
+						
+				})
+			
+			
+		</script>
+		
+	</body>
+</html>

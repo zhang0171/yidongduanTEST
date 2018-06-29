@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="css/base.css" />
+		<link rel="stylesheet" type="text/css" href="css/page.css"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<script>           
+     var bw = (document.documentElement.clientWidth/6.4)+"px";        
+     var htmlTag = document.getElementsByTagName("html")[0];        
+     htmlTag.style.fontSize=bw; 
+</script>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.js"></script>
+	<script type="text/javascript" src="js/common.js">
+	</script>
+	</head>
+	<body>
+		<!------------------------------header-->
+		<header>
+			<a href="index.html">返回</a>
+			<a href="">详情</a>
+			<a href=""></a>
+		</header>
+		
+		
+		<div class="shen">
+			<!--<div class="zi">
+				<p>
+					<img src=""/>
+					<span>
+						拉拉啊啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦啦
+					</span>
+				</p>
+				<a class="join">加入购物车</a>
+			</div>-->
+			
+		</div>
+		
+		<!-------------------------------------------footer-->
+		<footer>
+			<a href="index.html">
+			<em>&#xe611;</em>
+			<p>首页</p>
+			</a>
+			<a href="shopping.html">
+			<em>&#xe61d;</em>
+			<p>购物车</p>
+			</a>
+			<a href="login.html">
+			<em>&#xe654;</em>
+			<p>我的</p>
+			
+		</footer>
+
+
+
+<script type="text/javascript">
+	var id = location.search.split("=")[1];
+//	console.log(id)
+	$.getJSON("http://datainfo.duapp.com/shopdata/getGoods.php?callback=?",{goodsID:id},function(data){
+		console.log(data);
+		var str = "";
+		str += `
+			<div class="zi">
+				<p>
+					<img src="${data[0].goodsListImg}"/>
+					<span>
+						${data[0].goodsName}
+					</span>
+				</p>
+				<a class="join">加入购物车</a>
+			</div>
+		`
+		$(".shen").html(str);
+		$(".join").click(function(){
+			$.get(
+					"http://datainfo.duapp.com/shopdata/updatecar.php",
+					{userID:"13195610527",goodsID:id,},
+					function(res){
+							console.log(res)	
+					})
+					location.assign("shopping.html")
+		})
+		
+	})
+	
+	
+	
+	
+	
+</script>
+	</body>
+</html>
